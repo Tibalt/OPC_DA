@@ -56,11 +56,13 @@ void COPCClient::init()
 	*/
 	CoInitializeSecurity(NULL, -1, NULL, NULL, RPC_C_AUTHN_LEVEL_NONE, RPC_C_IMP_LEVEL_IMPERSONATE, NULL, EOAC_NONE, NULL);
 
-	HRESULT result = CoGetMalloc(MEMCTX_TASK, &iMalloc);
-	if (FAILED(result))
-	{
+  if(iMalloc == 0){
+	  HRESULT result = CoGetMalloc(MEMCTX_TASK, &iMalloc);
+	  if (FAILED(result))
+	  {
 		throw OPCException("CoGetMalloc failed");
-	}
+	  }
+  }
 }
 
 void COPCClient::stop()
